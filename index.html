@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AYBARS AI | B.A.R.S. Hybrid Edition — Otonom Ağ Koruma Platformu</title>
-    <meta name="description" content="AYBARS AI (Advanced Yield & Backbone Autonomous Recovery Sentinel) — SNMP ve SQL gerektirmeyen, 5 katmanlı Loop Avcısı ve 7/24 otonom nöbetçi destekli kurumsal ağ komuta merkezi.">
+    <title>AYBARS AI V12.5 | B.A.R.S. Hybrid Edition — Otonom Ağ Koruma Platformu</title>
+    <meta name="description" content="AYBARS AI V12.5 (Advanced Yield & Backbone Autonomous Recovery Sentinel) — SNMP ve SQL gerektirmeyen, 1-2 saniyede anlık Syslog alarmı, 5 katmanlı Loop Avcısı ve 7/24 otonom nöbetçi destekli kurumsal ağ komuta merkezi.">
     <style>
         :root {
             --bg-main: #06090d;
@@ -39,7 +39,6 @@
 
         .mono { font-family: 'Consolas', 'Courier New', monospace; }
 
-        /* NAVBAR */
         header {
             position: sticky;
             top: 0;
@@ -112,14 +111,12 @@
             box-shadow: 0 0 14px rgba(0, 210, 255, 0.5);
         }
 
-        /* SECTIONS */
         section {
             max-width: 1180px;
             margin: 0 auto;
             padding: 72px 24px;
         }
 
-        /* HERO */
         .hero {
             display: grid;
             grid-template-columns: 1.15fr 0.85fr;
@@ -224,7 +221,6 @@
             display: block;
         }
 
-        /* METRIC STRIP */
         .metrics {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -249,7 +245,6 @@
             color: var(--text-muted);
         }
 
-        /* SECTION HEADERS */
         .sec-head {
             text-align: center;
             max-width: 760px;
@@ -262,7 +257,6 @@
         }
         .sec-head p { color: var(--text-muted); font-size: 0.98rem; }
 
-        /* FEATURE GRID */
         .grid-3 {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -296,7 +290,6 @@
             font-size: 0.92rem;
         }
 
-        /* COMPARISON TABLE */
         .table-wrap {
             overflow-x: auto;
             background: var(--bg-card);
@@ -329,7 +322,6 @@
         }
         td.classic-col { color: var(--text-muted); }
 
-        /* VENDORS */
         .vendor-bar {
             display: flex;
             flex-wrap: wrap;
@@ -349,7 +341,6 @@
             letter-spacing: 0.5px;
         }
 
-        /* TERMINAL PREVIEW */
         .terminal-box {
             background: #04070a;
             border: 1px solid var(--emerald);
@@ -383,7 +374,6 @@
         .t-cyan { color: var(--cyan); font-weight: bold; }
         .t-ok { color: var(--neon-green); font-weight: bold; }
 
-        /* CONTACT BOX */
         .contact-card {
             background: linear-gradient(145deg, rgba(13, 19, 26, 0.95), rgba(8, 28, 22, 0.8));
             border: 1px solid var(--border-subtle);
@@ -420,7 +410,6 @@
             font-size: 0.86rem;
         }
 
-        /* LANGUAGE TOGGLE */
         [data-lang="en"] { display: none; }
         body.en-mode [data-lang="tr"] { display: none; }
         body.en-mode [data-lang="en"] { display: block; }
@@ -448,7 +437,7 @@
             </svg>
             <div>
                 <span class="brand-title mono">AYBARS AI</span>
-                <span class="brand-sub mono">V12.4 B.A.R.S. HYBRID</span>
+                <span class="brand-sub mono">V12.5 B.A.R.S. HYBRID</span>
             </div>
         </a>
         <nav>
@@ -465,18 +454,18 @@
     <div>
         <div class="pill mono">
             <span>●</span>
-            <span data-lang="tr">V12.4 B.A.R.S. HYBRID EDITION — CANLI SAHADA KANITLANDI</span>
-            <span data-lang="en">V12.4 B.A.R.S. HYBRID EDITION — FIELD-PROVEN</span>
+            <span data-lang="tr">V12.5 B.A.R.S. HYBRID — ANLIK UDP 514 SYSLOG + RETRY</span>
+            <span data-lang="en">V12.5 B.A.R.S. HYBRID — REAL-TIME SYSLOG 514 + RETRY</span>
         </div>
         <h1 class="mono">AYBARS AI</h1>
         <div class="acronym-en mono">Advanced Yield &amp; Backbone Autonomous Recovery Sentinel</div>
         <div class="acronym-tr mono">Gelişmiş Verimlilik ve Omurga Otonom İyileştirme Nöbetçisi</div>
 
         <p class="lead" data-lang="tr">
-            SNMP veya SQL veritabanı kurulumu gerektirmeyen, çoklu marka switch altyapılarıyla doğrudan CLI üzerinden konuşan, 5 katmanlı Loop Avcısı ve 7/24 otonom nöbetçi destekli yeni nesil ağ komuta ve kriz yönetim platformu.
+            SNMP veya SQL veritabanı kurulumu gerektirmeyen, çoklu marka switch altyapılarıyla doğrudan CLI üzerinden konuşan, 1-2 saniyede anlık Syslog alarmı, 5 katmanlı Loop Avcısı ve 7/24 otonom nöbetçi destekli yeni nesil ağ komuta platformu.
         </p>
         <p class="lead" data-lang="en">
-            Next-generation autonomous network protection and crisis command platform. Zero-SNMP, Zero-SQL, multi-vendor CLI abstraction featuring a 5-layer Loop Hunter, self-healing edge recovery, and 24/7 zero-noise alerting.
+            Next-generation autonomous network protection and crisis command platform. Zero-SNMP, Zero-SQL, multi-vendor CLI abstraction featuring 1-2s real-time UDP 514 Syslog alerting, a 5-layer Loop Hunter, and 2-stage retry protection.
         </p>
 
         <div class="cta-group">
@@ -506,6 +495,11 @@
             <div class="metric-lbl" data-lang="en">Zero SNMP / Zero SQL Overhead</div>
         </div>
         <div class="metric-box">
+            <div class="metric-val mono">1-2 sn</div>
+            <div class="metric-lbl" data-lang="tr">Anlık UDP 514 Syslog Loop Alarmı</div>
+            <div class="metric-lbl" data-lang="en">Real-Time UDP 514 Syslog Alerting</div>
+        </div>
+        <div class="metric-box">
             <div class="metric-val mono">5 KATMAN</div>
             <div class="metric-lbl" data-lang="tr">B.A.R.S. Hibrit Loop Avcısı</div>
             <div class="metric-lbl" data-lang="en">B.A.R.S. Multi-Layer Loop Hunter</div>
@@ -514,11 +508,6 @@
             <div class="metric-val mono">900 sn</div>
             <div class="metric-lbl" data-lang="tr">Otonom Port İyileşme (Self-Healing)</div>
             <div class="metric-lbl" data-lang="en">Autonomous Edge Self-Healing</div>
-        </div>
-        <div class="metric-box">
-            <div class="metric-val mono">7/24</div>
-            <div class="metric-lbl" data-lang="tr">Sıfır Gürültülü Otonom Nöbetçi</div>
-            <div class="metric-lbl" data-lang="en">Zero-Noise Autonomous Watchdog</div>
         </div>
     </div>
 </section>
@@ -533,19 +522,19 @@
 
     <div class="grid-3">
         <div class="card">
-            <span class="card-icon">🌪️</span>
-            <h3 data-lang="tr">5 Katmanlı B.A.R.S. Loop Avcısı</h3>
-            <h3 data-lang="en">5-Layer B.A.R.S. Loop Hunter</h3>
-            <p data-lang="tr">Aruba AOS-CX (Bpdu-Error) ve HP Comware 7 (BPDU-Protection, STP Down-Port, Loopback-Detection) ile Self-LLDP köprülerini tarayarak döngü yapan portları nokta atışı yakalar.</p>
-            <p data-lang="en">Combines Bpdu-Error, Comware BPDU-Protection, STP Down-Port, Loopback-Detection, and Self-LLDP bridge inspection to catch loops instantly.</p>
+            <span class="card-icon">📡</span>
+            <h3 data-lang="tr">Anlık UDP 514 Syslog &amp; 5 Katmanlı Loop Avcısı</h3>
+            <h3 data-lang="en">Real-Time Syslog 514 &amp; 5-Layer Loop Hunter</h3>
+            <p data-lang="tr">Periyodik taramayı beklemeden 1-2 saniyede BPDU-Protection ve Bpdu-Error yakalar. Aruba ve HP Comware 7 cihazlarda köprülenen port çiftlerini (Self-LLDP) nokta atışı raporlar.</p>
+            <p data-lang="en">Captures BPDU-Protection and Bpdu-Error traps in 1-2 seconds via UDP 514, combined with 5-layer STP Down-Port and Self-LLDP bridge inspection.</p>
         </div>
 
         <div class="card">
             <span class="card-icon">📊</span>
-            <h3 data-lang="tr">Deterministik Delta &amp; Sıfır Gürültü</h3>
-            <h3 data-lang="en">Deterministic Zero-Noise Delta</h3>
-            <p data-lang="tr">Switch sayaçları sıfırlanmasa bile iki tarama farkını hesaplar. TX kuyruk taşmalarını (Dropped 0) ve AP Giants (MTU 1500) paketlerini eler; sadece gerçek fiziksel kablo/SFP arızasını raporlar.</p>
-            <p data-lang="en">Computes exact counter deltas across scans, filtering out TX buffer drops (Dropped 0) and MTU Giants to alert only on true CRC/physical faults.</p>
+            <h3 data-lang="tr">2 Aşamalı Retry &amp; Sıfır Gürültü Delta</h3>
+            <h3 data-lang="en">2-Stage Retry &amp; Zero-Noise Delta</h3>
+            <p data-lang="tr">Anlık SSH gecikmelerinde 5 saniye bekleyip yeniden doğrular (sıfır yanlış DOWN alarmı). Dropped 0 (TX) ve Giants (MTU) gürültüsünü eleyip sadece gerçek CRC artışlarını bildirir.</p>
+            <p data-lang="en">Verifies unreachable switches with a 5-second retry to eliminate false DOWN alarms, while filtering Dropped 0 and MTU Giants noise.</p>
         </div>
 
         <div class="card">
@@ -576,7 +565,7 @@
             <span class="card-icon">🧠</span>
             <h3 data-lang="tr">AI Kriz Masası &amp; 7/24 Nöbetçi</h3>
             <h3 data-lang="en">AI Crisis Desk &amp; 24/7 Watchdog</h3>
-            <p data-lang="tr">Yapay zeka kök neden analizi, Türkçe sesli kriz anonsu, toplu komut (Mass-Config), otomatik .ZIP konfigürasyon yedekleme ve 7/24 HTML e-posta alarmları tek çatı altında.</p>
+            <p data-lang="tr">Yapay zeka kök neden analizi, Türkçe sesli kriz anonsu, toplu komut (Mass-Config), otomatik .ZIP konfigürasyon yedekleme ve 7/24 spam korumalı HTML e-posta alarmları tek çatı altında.</p>
             <p data-lang="en">AI-assisted root-cause summaries, voice crisis briefings, Mass-Config automation, one-click .ZIP backups, and silent 24/7 SMTP watchdog.</p>
         </div>
     </div>
@@ -584,10 +573,10 @@
 
 <section id="architecture">
     <div class="sec-head">
-        <h2 data-lang="tr">Canlı B.A.R.S. Teşhis Akışı</h2>
-        <h2 data-lang="en">Live B.A.R.S. Diagnostic Flow</h2>
-        <p data-lang="tr">Karmaşık CLI çıktıları saniyeler içinde net, gürültüsüz ve eyleme hazır alarmlara dönüşür.</p>
-        <p data-lang="en">Raw multi-vendor CLI telemetry distilled into actionable, noise-free alerts in seconds.</p>
+        <h2 data-lang="tr">Canlı B.A.R.S. + Syslog Teşhis Akışı</h2>
+        <h2 data-lang="en">Live B.A.R.S. + Syslog Diagnostic Flow</h2>
+        <p data-lang="tr">Karmaşık CLI ve Syslog akışları saniyeler içinde net, gürültüsüz ve eyleme hazır alarmlara dönüşür.</p>
+        <p data-lang="en">Raw multi-vendor CLI &amp; UDP 514 Syslog streams distilled into actionable, noise-free alerts in seconds.</p>
     </div>
 
     <div class="terminal-box">
@@ -595,14 +584,14 @@
             <span class="dot dot-r"></span>
             <span class="dot dot-y"></span>
             <span class="dot dot-g"></span>
-            <span style="margin-left:8px;">aybars-ai-engine — B.A.R.S. Watchdog Telemetry</span>
+            <span style="margin-left:8px;">aybars-ai-engine — B.A.R.S. V12.5 Watchdog + UDP 514 Syslog</span>
         </div>
         <div class="term-body">
-&gt; [AYBARS AI V12.4] Periyodik otonom tarama baslatildi (Multi-Vendor Parallel CLI)...<br>
-&gt; <span class="t-cyan">[FILTER]</span> TX Kuyruk Dusmeleri (Dropped 0) ve AP Giants (MTU 1500) elendi.<br>
-&gt; <span class="t-crit">🚨 [LOOP YAKALANDI - EDGE-SW-04]</span> Fiziksel CAT6 Koprusu: Port 1/0/7 &lt;---&gt; Port 1/0/15 (BPDU-Protection Kilitli)<br>
+&gt; <span class="t-cyan">[SYSLOG AKTIF]</span> Gercek zamanli UDP 514 dinleyici baslatildi (1-2 sn anlik tepki)...<br>
+&gt; <span class="t-crit">⚡ [ANLIK SYSLOG - EDGE-SW-04]</span> STP_BPDU_PROTECTION: Port GE1/0/13 &lt;---&gt; GE1/0/15 dongu tespit edildi!<br>
+&gt; <span class="t-ok">📨 [SMTP ALARM]</span> 1.4 saniyede acil e-posta iletildi (5 dk spam kalkani aktif).<br>
+&gt; <span class="t-cyan">[RETRY &amp; FILTER]</span> 2 asama SSH dogrulamasi tamamlandi | Dropped 0 ve AP Giants elendi.<br>
 &gt; <span class="t-cyan">[SELF-HEALING]</span> Otomatik uyandirma zamanlayicisi aktif: 900 sn (15 dk)<br>
-&gt; <span class="t-ok">📨 [SMTP ALARM]</span> 1 Kritik Bulgu yonetici e-posta adresine iletildi.<br>
 &gt; <span class="t-ok">✅ [DURUM]</span> Omurga ve diger kenar switch'ler stabil. (+100 fiziksel hata esigi altinda)
         </div>
     </div>
@@ -628,7 +617,7 @@
                 <tr>
                     <th><span data-lang="tr">Kriter</span><span data-lang="en">Capability</span></th>
                     <th><span data-lang="tr">Klasik NMS (SolarWinds / PRTG / Zabbix)</span><span data-lang="en">Legacy NMS (SolarWinds / PRTG / Zabbix)</span></th>
-                    <th>AYBARS AI [B.A.R.S. Hybrid]</th>
+                    <th>AYBARS AI V12.5 [B.A.R.S. Hybrid]</th>
                 </tr>
             </thead>
             <tbody>
@@ -638,14 +627,14 @@
                     <td class="aybars-col"><span data-lang="tr">SNMP &amp; SQL Gerektirmez — 5 dakikada doğrudan SSH/Telnet ile çalışır.</span><span data-lang="en">Zero-SNMP &amp; Zero-SQL — Operational in 5 minutes via CLI.</span></td>
                 </tr>
                 <tr>
-                    <td><strong data-lang="tr">Loop Tespiti</strong><strong data-lang="en">Loop Detection</strong></td>
+                    <td><strong data-lang="tr">Loop Tepki Süresi</strong><strong data-lang="en">Loop Detection Speed</strong></td>
                     <td class="classic-col"><span data-lang="tr">Kapanan portu sıradan "Port Down" sanarak sessiz kalır.</span><span data-lang="en">Treats error-disabled ports as ordinary link-down events.</span></td>
-                    <td class="aybars-col"><span data-lang="tr">5 Katmanlı Avcı: Bpdu-Error, Comware BPDU-Protection ve Self-LLDP yakalar.</span><span data-lang="en">5-Layer Hunter catches Bpdu-Error, BPDU-Protection &amp; Self-LLDP bridges.</span></td>
+                    <td class="aybars-col"><span data-lang="tr">1-2 Saniye (Anlık UDP 514 Syslog) + 5 Katmanlı B.A.R.S. Avcısı.</span><span data-lang="en">1-2s Real-Time UDP 514 Syslog + 5-Layer B.A.R.S. Hunter.</span></td>
                 </tr>
                 <tr>
-                    <td><strong data-lang="tr">Alarm Kalitesi</strong><strong data-lang="en">Alert Precision</strong></td>
-                    <td class="classic-col"><span data-lang="tr">Küçük paket düşmelerinde yüzlerce sahte uyarı üretir.</span><span data-lang="en">Alert fatigue from buffer drops and historical counters.</span></td>
-                    <td class="aybars-col"><span data-lang="tr">Deterministik Delta (+100 Eşik) ile sıfır gürültü ve gerçek CRC ayrımı.</span><span data-lang="en">Deterministic Delta (+100 threshold) with zero-noise filtering.</span></td>
+                    <td><strong data-lang="tr">Yanlış Alarm Koruması</strong><strong data-lang="en">False-Alert Immunity</strong></td>
+                    <td class="classic-col"><span data-lang="tr">Anlık gecikmelerde ve paket düşmelerinde spam mail üretir.</span><span data-lang="en">Alert fatigue from transient timeouts and buffer drops.</span></td>
+                    <td class="aybars-col"><span data-lang="tr">2 Aşamalı Retry + Deterministik Delta (+100 Eşik) &amp; 5 dk Cooldown.</span><span data-lang="en">2-Stage Retry + Deterministic Delta (+100) &amp; 5-Min Cooldown.</span></td>
                 </tr>
                 <tr>
                     <td><strong data-lang="tr">Aktif Müdahale</strong><strong data-lang="en">Active Remediation</strong></td>
@@ -668,11 +657,15 @@
             Protect your hospital, public institution, or enterprise campus network autonomously without SNMP complexity. Reach out for a live walkthrough and commercial licensing options.
         </p>
         <div class="cta-group" style="justify-content:center;">
-            <a href="mailto:iletisim@ornekdomain.com?subject=AYBARS%20AI%20Kurumsal%20Demo%20Talebi" class="btn-primary">
+            <a href="mailto:erdoganvolkan8167@gmail.com?subject=AYBARS%20AI%20Kurumsal%20Demo%20Talebi" class="btn-primary">
                 <span data-lang="tr">📩 E-Posta ile İletişime Geç</span>
                 <span data-lang="en">📩 Contact via Email</span>
             </a>
-            <a href="https://github.com" target="_blank" class="btn-outline">
+            <a href="https://www.linkedin.com/in/volkan-erdo%C4%9Fan-9665641b5" target="_blank" class="btn-outline">
+                <span data-lang="tr">💼 LinkedIn Profili</span>
+                <span data-lang="en">💼 LinkedIn Profile</span>
+            </a>
+            <a href="https://github.com/erdoganvolkan8167-commits/aybars-ai" target="_blank" class="btn-outline">
                 <span data-lang="tr">💻 GitHub Vitrin Reposu</span>
                 <span data-lang="en">💻 GitHub Showcase Repo</span>
             </a>
@@ -685,7 +678,7 @@
 
 <footer>
     <div class="mono" style="color:#ffffff; font-weight:700; margin-bottom:6px;">
-        AYBARS AI — V12.4 [B.A.R.S. HYBRID EDITION]
+        AYBARS AI — V12.5 [B.A.R.S. HYBRID EDITION]
     </div>
     <p>
         &copy; 2026 <strong>Volkan Erdoğan</strong> | Enterprise Network Security &amp; AI Automation.
