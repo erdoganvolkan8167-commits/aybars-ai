@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AYBARS AI | B.A.R.S. Hybrid Edition — Otonom Ağ Koruma Platformu</title>
+    <meta name="description" content="AYBARS AI (Advanced Yield & Backbone Autonomous Recovery Sentinel) — SNMP ve SQL gerektirmeyen, 5 katmanlı Loop Avcısı ve 7/24 otonom nöbetçi destekli kurumsal ağ komuta merkezi.">
+    <style>
+        :root {
+            --bg-main: #06090d;
+            --bg-card: #0d131a;
+            --bg-card-hover: #121c26;
+            --neon-green: #00ff41;
+            --emerald: #2ea043;
+            --cyan: #00d2ff;
+            --danger: #ff3b3b;
+            --text-main: #e6edf3;
+            --text-muted: #8b949e;
+            --border-subtle: rgba(0, 255, 65, 0.22);
+            --border-cyan: rgba(0, 210, 255, 0.3);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            line-height: 1.65;
+            overflow-x: hidden;
+            background-image:
+                radial-gradient(circle at 15% 15%, rgba(0, 255, 65, 0.08), transparent 35%),
+                radial-gradient(circle at 85% 25%, rgba(0, 210, 255, 0.08), transparent 40%),
+                linear-gradient(rgba(0, 255, 65, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 65, 0.03) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 42px 42px, 42px 42px;
+        }
+
+        .mono { font-family: 'Consolas', 'Courier New', monospace; }
+
+        /* NAVBAR */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(14px);
+            background: rgba(6, 9, 13, 0.85);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        .nav-wrap {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 14px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+        .brand-shield {
+            width: 34px;
+            height: 34px;
+            filter: drop-shadow(0 0 8px rgba(0, 255, 65, 0.55));
+        }
+        .brand-title {
+            font-size: 1.2rem;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            color: #ffffff;
+        }
+        .brand-sub {
+            font-size: 0.72rem;
+            color: var(--neon-green);
+            display: block;
+            letter-spacing: 1px;
+        }
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+        }
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.92rem;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+        nav a:hover { color: var(--neon-green); }
+
+        .lang-btn {
+            background: rgba(0, 210, 255, 0.12);
+            color: var(--cyan);
+            border: 1px solid var(--border-cyan);
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: Consolas, monospace;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+        .lang-btn:hover {
+            background: var(--cyan);
+            color: #06090d;
+            box-shadow: 0 0 14px rgba(0, 210, 255, 0.5);
+        }
+
+        /* SECTIONS */
+        section {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 72px 24px;
+        }
+
+        /* HERO */
+        .hero {
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 48px;
+            align-items: center;
+            padding-top: 64px;
+            padding-bottom: 56px;
+        }
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            border-radius: 999px;
+            background: rgba(0, 255, 65, 0.1);
+            border: 1px solid var(--border-subtle);
+            color: var(--neon-green);
+            font-size: 0.82rem;
+            font-weight: 700;
+            margin-bottom: 18px;
+        }
+        .hero h1 {
+            font-size: clamp(2.2rem, 4.4vw, 3.4rem);
+            line-height: 1.12;
+            letter-spacing: -0.5px;
+            margin-bottom: 12px;
+            background: linear-gradient(90deg, #ffffff 0%, #c8fff4 55%, var(--cyan) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .acronym-en {
+            color: var(--cyan);
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 0.4px;
+        }
+        .acronym-tr {
+            color: var(--neon-green);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            opacity: 0.95;
+        }
+        .hero p.lead {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            margin-bottom: 28px;
+            max-width: 600px;
+        }
+        .cta-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--emerald), #00c853);
+            color: #041008;
+            padding: 13px 26px;
+            border-radius: 8px;
+            font-weight: 800;
+            text-decoration: none;
+            font-size: 0.95rem;
+            box-shadow: 0 0 22px rgba(0, 255, 65, 0.3);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px rgba(0, 255, 65, 0.55);
+        }
+        .btn-outline {
+            background: rgba(13, 19, 26, 0.9);
+            color: var(--cyan);
+            border: 1px solid var(--border-cyan);
+            padding: 13px 24px;
+            border-radius: 8px;
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+        }
+        .btn-outline:hover {
+            background: rgba(0, 210, 255, 0.14);
+            transform: translateY(-2px);
+        }
+
+        .hero-visual {
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+        .poster-frame {
+            width: 100%;
+            max-width: 390px;
+            border-radius: 14px;
+            border: 1px solid var(--border-subtle);
+            box-shadow: 0 0 40px rgba(0, 210, 255, 0.18), 0 18px 40px rgba(0, 0, 0, 0.7);
+            overflow: hidden;
+            background: #05080b;
+        }
+        .poster-frame img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* METRIC STRIP */
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-top: 10px;
+        }
+        .metric-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+        }
+        .metric-val {
+            font-size: 1.7rem;
+            font-weight: 800;
+            color: var(--neon-green);
+            margin-bottom: 4px;
+        }
+        .metric-lbl {
+            font-size: 0.84rem;
+            color: var(--text-muted);
+        }
+
+        /* SECTION HEADERS */
+        .sec-head {
+            text-align: center;
+            max-width: 760px;
+            margin: 0 auto 44px auto;
+        }
+        .sec-head h2 {
+            font-size: clamp(1.6rem, 3vw, 2.2rem);
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+        .sec-head p { color: var(--text-muted); font-size: 0.98rem; }
+
+        /* FEATURE GRID */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        .card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-top: 2px solid var(--emerald);
+            border-radius: 12px;
+            padding: 26px;
+            transition: transform 0.2s, border-color 0.2s, background 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: var(--neon-green);
+            background: var(--bg-card-hover);
+        }
+        .card-icon {
+            font-size: 1.8rem;
+            margin-bottom: 12px;
+            display: inline-block;
+        }
+        .card h3 {
+            color: #ffffff;
+            font-size: 1.08rem;
+            margin-bottom: 10px;
+        }
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.92rem;
+        }
+
+        /* COMPARISON TABLE */
+        .table-wrap {
+            overflow-x: auto;
+            background: var(--bg-card);
+            border: 1px solid var(--border-cyan);
+            border-radius: 12px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 680px;
+        }
+        th, td {
+            padding: 16px 20px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+            font-size: 0.93rem;
+        }
+        th {
+            background: rgba(0, 210, 255, 0.09);
+            color: var(--cyan);
+            font-family: Consolas, monospace;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        td.aybars-col {
+            color: #d7ffdf;
+            font-weight: 600;
+            background: rgba(0, 255, 65, 0.04);
+        }
+        td.classic-col { color: var(--text-muted); }
+
+        /* VENDORS */
+        .vendor-bar {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 14px;
+            margin-top: 20px;
+        }
+        .vendor-tag {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            color: #ffffff;
+            padding: 12px 22px;
+            border-radius: 8px;
+            font-family: Consolas, monospace;
+            font-weight: 700;
+            font-size: 0.92rem;
+            letter-spacing: 0.5px;
+        }
+
+        /* TERMINAL PREVIEW */
+        .terminal-box {
+            background: #04070a;
+            border: 1px solid var(--emerald);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.65);
+        }
+        .term-bar {
+            background: #10171f;
+            padding: 10px 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            font-size: 0.82rem;
+            color: var(--text-muted);
+        }
+        .dot { width: 11px; height: 11px; border-radius: 50%; display: inline-block; }
+        .dot-r { background: #ff5f56; }
+        .dot-y { background: #ffbd2e; }
+        .dot-g { background: #27c93f; }
+        .term-body {
+            padding: 20px 22px;
+            font-family: Consolas, monospace;
+            font-size: 0.88rem;
+            line-height: 1.7;
+            color: #a9f5bc;
+            overflow-x: auto;
+        }
+        .t-crit { color: #ff5555; font-weight: bold; }
+        .t-cyan { color: var(--cyan); font-weight: bold; }
+        .t-ok { color: var(--neon-green); font-weight: bold; }
+
+        /* CONTACT BOX */
+        .contact-card {
+            background: linear-gradient(145deg, rgba(13, 19, 26, 0.95), rgba(8, 28, 22, 0.8));
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 44px 32px;
+            text-align: center;
+        }
+        .contact-card h2 {
+            font-size: 1.9rem;
+            color: #ffffff;
+            margin-bottom: 12px;
+        }
+        .contact-card p {
+            color: var(--text-muted);
+            max-width: 640px;
+            margin: 0 auto 28px auto;
+        }
+        .license-note {
+            display: inline-block;
+            margin-top: 22px;
+            padding: 8px 16px;
+            border-radius: 6px;
+            background: rgba(0, 0, 0, 0.45);
+            border: 1px dashed var(--border-cyan);
+            color: var(--cyan);
+            font-size: 0.83rem;
+        }
+
+        footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 28px 24px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.86rem;
+        }
+
+        /* LANGUAGE TOGGLE */
+        [data-lang="en"] { display: none; }
+        body.en-mode [data-lang="tr"] { display: none; }
+        body.en-mode [data-lang="en"] { display: block; }
+        body.en-mode span[data-lang="en"], body.en-mode a[data-lang="en"] { display: inline-block; }
+        span[data-lang="tr"], a[data-lang="tr"] { display: inline-block; }
+
+        @media (max-width: 920px) {
+            .hero { grid-template-columns: 1fr; text-align: center; }
+            .hero p.lead { margin-left: auto; margin-right: auto; }
+            .cta-group { justify-content: center; }
+            .metrics { grid-template-columns: repeat(2, 1fr); }
+            .grid-3 { grid-template-columns: 1fr; }
+            nav a { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="nav-wrap">
+        <a href="#" class="brand">
+            <svg class="brand-shield" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M32 5L54 14V31C54 45.2 44.6 56.4 32 60C19.4 56.4 10 45.2 10 31V14L32 5Z" stroke="#00FF41" stroke-width="3.5" fill="rgba(0,255,65,0.08)"/>
+                <path d="M22 33L29 40L43 24" stroke="#00D2FF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <div>
+                <span class="brand-title mono">AYBARS AI</span>
+                <span class="brand-sub mono">V12.4 B.A.R.S. HYBRID</span>
+            </div>
+        </a>
+        <nav>
+            <a href="#features"><span data-lang="tr">Özellikler</span><span data-lang="en">Features</span></a>
+            <a href="#comparison"><span data-lang="tr">Karşılaştırma</span><span data-lang="en">Comparison</span></a>
+            <a href="#architecture"><span data-lang="tr">B.A.R.S. Motoru</span><span data-lang="en">B.A.R.S. Engine</span></a>
+            <a href="#contact"><span data-lang="tr">Kurumsal Demo</span><span data-lang="en">Enterprise Demo</span></a>
+            <button id="langToggle" class="lang-btn" onclick="toggleLang()">EN / TR</button>
+        </nav>
+    </div>
+</header>
+
+<section class="hero">
+    <div>
+        <div class="pill mono">
+            <span>●</span>
+            <span data-lang="tr">V12.4 B.A.R.S. HYBRID EDITION — CANLI SAHADA KANITLANDI</span>
+            <span data-lang="en">V12.4 B.A.R.S. HYBRID EDITION — FIELD-PROVEN</span>
+        </div>
+        <h1 class="mono">AYBARS AI</h1>
+        <div class="acronym-en mono">Advanced Yield &amp; Backbone Autonomous Recovery Sentinel</div>
+        <div class="acronym-tr mono">Gelişmiş Verimlilik ve Omurga Otonom İyileştirme Nöbetçisi</div>
+
+        <p class="lead" data-lang="tr">
+            SNMP veya SQL veritabanı kurulumu gerektirmeyen, çoklu marka switch altyapılarıyla doğrudan CLI üzerinden konuşan, 5 katmanlı Loop Avcısı ve 7/24 otonom nöbetçi destekli yeni nesil ağ komuta ve kriz yönetim platformu.
+        </p>
+        <p class="lead" data-lang="en">
+            Next-generation autonomous network protection and crisis command platform. Zero-SNMP, Zero-SQL, multi-vendor CLI abstraction featuring a 5-layer Loop Hunter, self-healing edge recovery, and 24/7 zero-noise alerting.
+        </p>
+
+        <div class="cta-group">
+            <a href="#contact" class="btn-primary">
+                <span data-lang="tr">🛡️ Kurumsal Demo Talep Et</span>
+                <span data-lang="en">🛡️ Request Enterprise Demo</span>
+            </a>
+            <a href="#comparison" class="btn-outline">
+                <span data-lang="tr">⚔️ Klasik NMS ile Karşılaştır</span>
+                <span data-lang="en">⚔️ Compare with Legacy NMS</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="hero-visual">
+        <div class="poster-frame">
+            <img src="brosur.jpg" alt="AYBARS AI B.A.R.S. Hybrid Edition Broşür">
+        </div>
+    </div>
+</section>
+
+<section style="padding-top: 0; padding-bottom: 36px;">
+    <div class="metrics">
+        <div class="metric-box">
+            <div class="metric-val mono">0 SNMP</div>
+            <div class="metric-lbl" data-lang="tr">SNMP &amp; SQL Kurulumu Gerektirmez</div>
+            <div class="metric-lbl" data-lang="en">Zero SNMP / Zero SQL Overhead</div>
+        </div>
+        <div class="metric-box">
+            <div class="metric-val mono">5 KATMAN</div>
+            <div class="metric-lbl" data-lang="tr">B.A.R.S. Hibrit Loop Avcısı</div>
+            <div class="metric-lbl" data-lang="en">B.A.R.S. Multi-Layer Loop Hunter</div>
+        </div>
+        <div class="metric-box">
+            <div class="metric-val mono">900 sn</div>
+            <div class="metric-lbl" data-lang="tr">Otonom Port İyileşme (Self-Healing)</div>
+            <div class="metric-lbl" data-lang="en">Autonomous Edge Self-Healing</div>
+        </div>
+        <div class="metric-box">
+            <div class="metric-val mono">7/24</div>
+            <div class="metric-lbl" data-lang="tr">Sıfır Gürültülü Otonom Nöbetçi</div>
+            <div class="metric-lbl" data-lang="en">Zero-Noise Autonomous Watchdog</div>
+        </div>
+    </div>
+</section>
+
+<section id="features">
+    <div class="sec-head">
+        <h2 data-lang="tr">Sadece İzlemez; Korur, Analiz Eder ve Müdahale Eder</h2>
+        <h2 data-lang="en">Beyond Monitoring: Protect, Analyze &amp; Remediate</h2>
+        <p data-lang="tr">Hastane, kamu kurumu ve kurumsal kampüs ağlarındaki en zorlu saha krizlerini saniyeler içinde çözmek için tasarlandı.</p>
+        <p data-lang="en">Engineered to resolve critical real-world campus, healthcare, and enterprise LAN incidents in seconds.</p>
+    </div>
+
+    <div class="grid-3">
+        <div class="card">
+            <span class="card-icon">🌪️</span>
+            <h3 data-lang="tr">5 Katmanlı B.A.R.S. Loop Avcısı</h3>
+            <h3 data-lang="en">5-Layer B.A.R.S. Loop Hunter</h3>
+            <p data-lang="tr">Aruba AOS-CX (Bpdu-Error) ve HP Comware 7 (BPDU-Protection, STP Down-Port, Loopback-Detection) ile Self-LLDP köprülerini tarayarak döngü yapan portları nokta atışı yakalar.</p>
+            <p data-lang="en">Combines Bpdu-Error, Comware BPDU-Protection, STP Down-Port, Loopback-Detection, and Self-LLDP bridge inspection to catch loops instantly.</p>
+        </div>
+
+        <div class="card">
+            <span class="card-icon">📊</span>
+            <h3 data-lang="tr">Deterministik Delta &amp; Sıfır Gürültü</h3>
+            <h3 data-lang="en">Deterministic Zero-Noise Delta</h3>
+            <p data-lang="tr">Switch sayaçları sıfırlanmasa bile iki tarama farkını hesaplar. TX kuyruk taşmalarını (Dropped 0) ve AP Giants (MTU 1500) paketlerini eler; sadece gerçek fiziksel kablo/SFP arızasını raporlar.</p>
+            <p data-lang="en">Computes exact counter deltas across scans, filtering out TX buffer drops (Dropped 0) and MTU Giants to alert only on true CRC/physical faults.</p>
+        </div>
+
+        <div class="card">
+            <span class="card-icon">⚡</span>
+            <h3 data-lang="tr">Tek Tuşla PoE Şoklama &amp; Karantina</h3>
+            <h3 data-lang="en">One-Click PoE Cycle &amp; Quarantine</h3>
+            <p data-lang="tr">Donan IP kameraları ve Access Point'leri web ekranından tek tuşla elektrik kesip açarak resetler; ağı bozan uç portları anında karantinaya (Shutdown) alır.</p>
+            <p data-lang="en">Remotely power-cycle unresponsive PoE cameras and access points or quarantine rogue edge ports directly from the web console.</p>
+        </div>
+
+        <div class="card">
+            <span class="card-icon">🌡️</span>
+            <h3 data-lang="tr">SFP Optik Lazer &amp; ARP Bekçisi</h3>
+            <h3 data-lang="en">SFP Optical DOM &amp; ARP Sentinel</h3>
+            <p data-lang="tr">Fiber modüllerdeki Rx dBm zayıflamalarını (-14.5 / -17.0 dBm) kesinti yaşanmadan tespit eder. Merkez DHCP yetkisi olmadan statik IP/MAC çakışmalarını yakalar.</p>
+            <p data-lang="en">Monitors fiber optical power (dBm) and temperature to predict link drops, plus DHCP-less Core ARP conflict detection.</p>
+        </div>
+
+        <div class="card">
+            <span class="card-icon">🎯</span>
+            <h3 data-lang="tr">Evrensel IP / MAC Nokta Atışı Bulucu</h3>
+            <h3 data-lang="en">Universal IP / MAC Edge Locator</h3>
+            <p data-lang="tr">Tek bir IP veya MAC adresi girildiğinde Omurga ARP tablosunu çözer, Uplink portlarını otomatik eler ve cihazın bağlı olduğu kesin switch ile port numarasını tek satırda verir.</p>
+            <p data-lang="en">Resolves core ARP entries and filters uplinks automatically to pinpoint the exact access switch and port for any IP or MAC address.</p>
+        </div>
+
+        <div class="card">
+            <span class="card-icon">🧠</span>
+            <h3 data-lang="tr">AI Kriz Masası &amp; 7/24 Nöbetçi</h3>
+            <h3 data-lang="en">AI Crisis Desk &amp; 24/7 Watchdog</h3>
+            <p data-lang="tr">Yapay zeka kök neden analizi, Türkçe sesli kriz anonsu, toplu komut (Mass-Config), otomatik .ZIP konfigürasyon yedekleme ve 7/24 HTML e-posta alarmları tek çatı altında.</p>
+            <p data-lang="en">AI-assisted root-cause summaries, voice crisis briefings, Mass-Config automation, one-click .ZIP backups, and silent 24/7 SMTP watchdog.</p>
+        </div>
+    </div>
+</section>
+
+<section id="architecture">
+    <div class="sec-head">
+        <h2 data-lang="tr">Canlı B.A.R.S. Teşhis Akışı</h2>
+        <h2 data-lang="en">Live B.A.R.S. Diagnostic Flow</h2>
+        <p data-lang="tr">Karmaşık CLI çıktıları saniyeler içinde net, gürültüsüz ve eyleme hazır alarmlara dönüşür.</p>
+        <p data-lang="en">Raw multi-vendor CLI telemetry distilled into actionable, noise-free alerts in seconds.</p>
+    </div>
+
+    <div class="terminal-box">
+        <div class="term-bar mono">
+            <span class="dot dot-r"></span>
+            <span class="dot dot-y"></span>
+            <span class="dot dot-g"></span>
+            <span style="margin-left:8px;">aybars-ai-engine — B.A.R.S. Watchdog Telemetry</span>
+        </div>
+        <div class="term-body">
+&gt; [AYBARS AI V12.4] Periyodik otonom tarama baslatildi (Multi-Vendor Parallel CLI)...<br>
+&gt; <span class="t-cyan">[FILTER]</span> TX Kuyruk Dusmeleri (Dropped 0) ve AP Giants (MTU 1500) elendi.<br>
+&gt; <span class="t-crit">🚨 [LOOP YAKALANDI - EDGE-SW-04]</span> Fiziksel CAT6 Koprusu: Port 1/0/7 &lt;---&gt; Port 1/0/15 (BPDU-Protection Kilitli)<br>
+&gt; <span class="t-cyan">[SELF-HEALING]</span> Otomatik uyandirma zamanlayicisi aktif: 900 sn (15 dk)<br>
+&gt; <span class="t-ok">📨 [SMTP ALARM]</span> 1 Kritik Bulgu yonetici e-posta adresine iletildi.<br>
+&gt; <span class="t-ok">✅ [DURUM]</span> Omurga ve diger kenar switch'ler stabil. (+100 fiziksel hata esigi altinda)
+        </div>
+    </div>
+
+    <div class="vendor-bar">
+        <div class="vendor-tag">ARUBA AOS-CX</div>
+        <div class="vendor-tag">HP / H3C COMWARE v5 &amp; v7</div>
+        <div class="vendor-tag">CISCO IOS / IOS-XE</div>
+        <div class="vendor-tag">HUAWEI VRP</div>
+        <div class="vendor-tag">HP PROCURVE</div>
+    </div>
+</section>
+
+<section id="comparison">
+    <div class="sec-head">
+        <h2 data-lang="tr">Geleneksel NMS Yazılımları ile Mimari Farkı</h2>
+        <h2 data-lang="en">Architectural Edge Over Legacy NMS</h2>
+    </div>
+
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th><span data-lang="tr">Kriter</span><span data-lang="en">Capability</span></th>
+                    <th><span data-lang="tr">Klasik NMS (SolarWinds / PRTG / Zabbix)</span><span data-lang="en">Legacy NMS (SolarWinds / PRTG / Zabbix)</span></th>
+                    <th>AYBARS AI [B.A.R.S. Hybrid]</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong data-lang="tr">Kurulum &amp; Bağımlılık</strong><strong data-lang="en">Deployment</strong></td>
+                    <td class="classic-col"><span data-lang="tr">SQL sunucusu, SNMP v2/v3 ve MIB derleme gerekir.</span><span data-lang="en">Requires SQL database, SNMP setup, and MIB tuning.</span></td>
+                    <td class="aybars-col"><span data-lang="tr">SNMP &amp; SQL Gerektirmez — 5 dakikada doğrudan SSH/Telnet ile çalışır.</span><span data-lang="en">Zero-SNMP &amp; Zero-SQL — Operational in 5 minutes via CLI.</span></td>
+                </tr>
+                <tr>
+                    <td><strong data-lang="tr">Loop Tespiti</strong><strong data-lang="en">Loop Detection</strong></td>
+                    <td class="classic-col"><span data-lang="tr">Kapanan portu sıradan "Port Down" sanarak sessiz kalır.</span><span data-lang="en">Treats error-disabled ports as ordinary link-down events.</span></td>
+                    <td class="aybars-col"><span data-lang="tr">5 Katmanlı Avcı: Bpdu-Error, Comware BPDU-Protection ve Self-LLDP yakalar.</span><span data-lang="en">5-Layer Hunter catches Bpdu-Error, BPDU-Protection &amp; Self-LLDP bridges.</span></td>
+                </tr>
+                <tr>
+                    <td><strong data-lang="tr">Alarm Kalitesi</strong><strong data-lang="en">Alert Precision</strong></td>
+                    <td class="classic-col"><span data-lang="tr">Küçük paket düşmelerinde yüzlerce sahte uyarı üretir.</span><span data-lang="en">Alert fatigue from buffer drops and historical counters.</span></td>
+                    <td class="aybars-col"><span data-lang="tr">Deterministik Delta (+100 Eşik) ile sıfır gürültü ve gerçek CRC ayrımı.</span><span data-lang="en">Deterministic Delta (+100 threshold) with zero-noise filtering.</span></td>
+                </tr>
+                <tr>
+                    <td><strong data-lang="tr">Aktif Müdahale</strong><strong data-lang="en">Active Remediation</strong></td>
+                    <td class="classic-col"><span data-lang="tr">Sadece grafik çizer; müdahale için CLI açmak gerekir.</span><span data-lang="en">Read-only graphs; requires external terminal sessions.</span></td>
+                    <td class="aybars-col"><span data-lang="tr">Tek tuşla PoE Şoklama, Port Karantina, Mass-Config ve .ZIP Yedek.</span><span data-lang="en">One-click PoE Reset, Port Quarantine, Mass-Config &amp; Backups.</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<section id="contact">
+    <div class="contact-card">
+        <h2 data-lang="tr">Kurumunuz İçin AYBARS AI Demosu Talep Edin</h2>
+        <h2 data-lang="en">Request an Enterprise AYBARS AI Demo</h2>
+        <p data-lang="tr">
+            Hastane, kamu kurumu veya kurumsal kampüs ağınızı SNMP karmaşasına girmeden otonom koruma altına almak, canlı demo planlamak ve süreli kurumsal lisanslama bilgisi almak için doğrudan iletişime geçebilirsiniz.
+        </p>
+        <p data-lang="en">
+            Protect your hospital, public institution, or enterprise campus network autonomously without SNMP complexity. Reach out for a live walkthrough and commercial licensing options.
+        </p>
+        <div class="cta-group" style="justify-content:center;">
+            <a href="mailto:iletisim@ornekdomain.com?subject=AYBARS%20AI%20Kurumsal%20Demo%20Talebi" class="btn-primary">
+                <span data-lang="tr">📩 E-Posta ile İletişime Geç</span>
+                <span data-lang="en">📩 Contact via Email</span>
+            </a>
+            <a href="https://github.com" target="_blank" class="btn-outline">
+                <span data-lang="tr">💻 GitHub Vitrin Reposu</span>
+                <span data-lang="en">💻 GitHub Showcase Repo</span>
+            </a>
+        </div>
+        <div class="license-note mono">
+            🔒 Commercial Hardware-Locked Licensing (AYB-HWID / AYBARS-PRO) • Zero Cloud Telemetry
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="mono" style="color:#ffffff; font-weight:700; margin-bottom:6px;">
+        AYBARS AI — V12.4 [B.A.R.S. HYBRID EDITION]
+    </div>
+    <p>
+        &copy; 2026 <strong>Volkan Erdoğan</strong> | Enterprise Network Security &amp; AI Automation.
+        <span data-lang="tr">Tüm Hakları Saklıdır.</span>
+        <span data-lang="en">All Rights Reserved.</span>
+    </p>
+</footer>
+
+<script>
+    function toggleLang() {
+        document.body.classList.toggle('en-mode');
+        const isEn = document.body.classList.contains('en-mode');
+        document.documentElement.lang = isEn ? 'en' : 'tr';
+    }
+</script>
+</body>
+</html>
