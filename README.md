@@ -152,7 +152,7 @@ Piyasadaki klasik NMS yazılımları yalnızca pasif grafikler çizerken, \*\*AY
 
 \* \*\*Geliştirici / Architect:\*\* Volkan Erdoğan — \*Enterprise Network Security \& AI Automation\*
 
-\* \*\*Web Tanıtım Sayfası:\*\* `https://<KULLANICI\\\_ADINIZ>.github.io/<REPO\\\_ADINIZ>/`
+\* \*\*Web Tanıtım Sayfası:\*\* `https://github.com/erdoganvolkan8167-commits`
 
 \* \*\*E-Posta / Demo Talebi:\*\* `erdoganvolkan8167@gmail.com` \*(Kendi e-posta adresinizle değiştirin)\*
 
